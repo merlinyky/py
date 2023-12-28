@@ -1,0 +1,26 @@
+import pandas as pd
+
+def process_dataframe_row(row):
+    if row['NAME'] == 'Alice':
+        return f"Processed Alice: {row['VALUE'] * 2}"
+    elif row['NAME'] == 'Bob':
+        return f"Processed Bob: {row['VALUE'] ** 0.5}"
+
+def process_alice(value):
+    return f"Processed Alice: {value * 2}"
+
+def process_bob(value):
+    return f"Processed Bob: {value ** 0.5}"
+
+def process_dataframe_row(row):
+    processing_functions = {
+        'Alice': process_alice,
+        'Bob': process_bob
+    }
+    
+    try:
+        # Try to call the processing function for the given name
+        return processing_functions[row['NAME']](row['VALUE'])
+    except KeyError:
+        # If the name is not found in the processing functions, handle the exception
+        return f"Unprocessed: {row['NAME']}"
