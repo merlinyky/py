@@ -1,0 +1,22 @@
+{
+    "product_type_mapping": {
+        "equity": "Equity",
+        "bond": "Fixed Income",
+        "fx": "FX",
+        "commodity": "Commodities",
+        "cds": "Fixed Income",
+        "equity option": "Equity",
+        "fx forward": "FX",
+        "oil future": "Commodities"
+    },
+    "notional_size_mapping": [
+        {"threshold": 100000, "label": "Small1"},
+        {"threshold": 500000, "label": "Small2"},
+        {"threshold": 1000000, "label": "Medium1"},
+        {"threshold": 5000000, "label": "Medium2"},
+        {"threshold": 10000000, "label": "Medium3"},
+        {"threshold": 20000000, "label": "Large1"},
+        {"threshold": 100000000, "label": "Large2"},
+        {"threshold": float("inf"), "label": "Large3"}
+    ]
+}
