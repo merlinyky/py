@@ -1,0 +1,24 @@
+def classify_time(hour):
+    if 0 <= hour < 12:
+        return "Morning"
+    elif 12 <= hour < 18:
+        return "Afternoon"
+    else:
+        return "Evening"
+
+==========
+
+def classify_time(hour):
+    time_classification = {
+        range(0, 12): "Morning",
+        range(12, 18): "Afternoon",
+        range(18, 24): "Evening"
+    }
+    for time_range, classification in time_classification.items():
+        if hour in time_range:
+            return classification
+    return "Invalid hour"  # For hours outside 0-23
+
+# Example usage
+for hour in range(24):
+    print(f"{hour}:00 - {classify_time(hour)}")
