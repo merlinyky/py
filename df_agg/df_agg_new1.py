@@ -11,8 +11,7 @@ def filter_and_calculate(df: pd.DataFrame, formula: Dict[str, Dict[str, str]]) -
     """
     for condition, calculations in formula.items():
         # Fixing the condition string for correct syntax
-        condition_fixed = condition.replace("AND", "and").replace("OR", "or")
-        filtered_df = df.query(condition_fixed)
+        filtered_df = df.query(condition)
 
         filtered_df = apply_calculations(filtered_df, calculations)
         df = filtered_df
@@ -49,7 +48,7 @@ df = pd.read_csv(df_path)
 # JSON configuration embedded directly in the code
 config = {
     "formula": {
-        "BUSINESS == 'Business1' AND PRODUCT == 'equity'": {
+        "BUSINESS == 'Business1' and PRODUCT == 'equity'": {
             "CALCULATION": "pct_change(MTM) * NOTIONAL / 1000"
         }
     }
