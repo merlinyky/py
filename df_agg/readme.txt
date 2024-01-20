@@ -1,0 +1,1 @@
+This implementation now provides a flexible way to apply different filtering conditions and calculations as defined in a JSON configuration file. The core engine code remains static while the logic can be extracted and modified in the config file as needed.
