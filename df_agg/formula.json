@@ -1,0 +1,15 @@
+{
+    "column_types": {
+        "MTM": float,
+        "NOTIONAL": float,
+        "BUSINESS": str,
+    },
+    "new_column": {
+        "COMPLEX_CALCULATION": float,
+    },
+    "formula": {
+        "BUSINESS == 'Business1' AND PRODUCT == 'equity'": {
+            "COMPLEX_CALCULATION": "pct_change(MTM) * NOTIONAL"
+        }
+    }
+}
