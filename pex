@@ -1,0 +1,86 @@
+To create a Python project that meets your requirements and package it using Pex, follow these steps:
+
+1. **Create the Python Project:**
+   - Create a Python script, let's call it `main.py`.
+   - The script will read from `input.txt`, `model_config.json`, and a command line date parameter.
+   - It will output a file named `output.parquet` and print "hello world".
+   - We'll use libraries like `numpy`, `pandas`, `os`, etc.
+
+2. **Create `requirements.txt`:**
+   - This file will list the dependencies like `numpy`, `pandas`, etc.
+
+3. **Package with Pex:**
+   - Use Pex to package the application and dependencies into a single executable file.
+
+4. **Rename and Execute the Binary:**
+   - Rename the binary to `code_binary.ral`.
+   - The executable will be run in a Linux environment as specified.
+
+Let's start by creating the example Python code and the `requirements.txt` file.
+
+### `main.py`
+
+```python
+import json
+import pandas as pd
+import sys
+import os
+
+def read_config(config_path):
+    with open(config_path) as config_file:
+        return json.load(config_file)
+
+def process_data(input_path, config):
+    # Fake processing logic
+    data = pd.read_csv(input_path)
+    data_processed = data.head() # Just as an example
+    return data_processed
+
+def main():
+    if len(sys.argv) != 5:
+        print("Usage: <executable> <YYYYMMDD> <config_path> <input_path> <output_message>")
+        sys.exit(1)
+
+    date, config_path, input_path, output_message = sys.argv[1:5]
+    print(f"Processing data for date: {date}")
+
+    config = read_config(config_path)
+    data_processed = process_data(input_path, config)
+
+    output_path = 'output.parquet'
+    data_processed.to_parquet(output_path)
+
+    print(output_message)
+
+if __name__ == "__main__":
+    main()
+```
+
+### `requirements.txt`
+
+```
+numpy
+pandas
+```
+
+### Packaging with Pex
+
+Now, let's package this with Pex. Ensure you have Pex installed (`pip install pex`), then run:
+
+```bash
+pex -r requirements.txt -o code_binary.ral --python-shebang='/usr/bin/env python' --entry-point=main:main .
+```
+
+This command will package your project into `code_binary.ral`. Note that the `--entry-point` flag points to the `main` function in your `main.py` script.
+
+### Executing the Binary
+
+Once you have your `code_binary.ral`, you can execute it in your Linux environment as follows:
+
+```bash
+$ ./code_binary.ral 20240101 model_config.json input.txt "hello world"
+```
+
+This command should read the `model_config.json` and `input.txt`, process the data, create `output.parquet`, and print "hello world". 
+
+Make sure your `main.py`, `requirements.txt`, `model_config.json`, and `input.txt` are all in the same directory where you run the Pex command, and that `main.py` is structured to correctly handle the inputs and outputs as you desire.
