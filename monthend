@@ -1,0 +1,40 @@
+Certainly! Below is a JavaScript function that takes a starting month in the format YYYY-MM and the number of quarters, then calculates and returns the month-end string after adding the specified number of quarters. Each quarter is equivalent to three months.
+
+javascript
+Copy code
+function calculateMonthEnd(startMonth, numQuarters) {
+    // Parse the startMonth string into year and month components
+    const year = parseInt(startMonth.substring(0, 4));
+    const month = parseInt(startMonth.substring(5, 7));
+
+    // Calculate the total number of months to add
+    const totalMonthsToAdd = numQuarters * 3;
+
+    // Create a date object starting at the first day of the given month
+    const date = new Date(year, month - 1, 1);
+
+    // Add the total months
+    date.setMonth(date.getMonth() + totalMonthsToAdd);
+
+    // Adjust the date to the end of the month
+    date.setDate(0);
+
+    // Format the year and month correctly
+    const endYear = date.getFullYear();
+    const endMonth = (date.getMonth() + 1).toString().padStart(2, '0');
+
+    // Return the formatted end month string
+    return `${endYear}-${endMonth}`;
+}
+
+// Example usage:
+const startMonth = "2023-12";
+const numQuarters = 1;
+console.log(calculateMonthEnd(startMonth, numQuarters));  // Output: 2024-03
+Explanation:
+Parsing the Date: The function starts by parsing the input startMonth into year and month components.
+Date Object: It creates a JavaScript Date object representing the first day of the given start month.
+Adding Months: The total months to add is calculated by multiplying the number of quarters by three. This total is then added to the month of the date.
+Adjusting the Date: To find the last day of the month, the setDate(0) method is used, which sets the date to the last day of the previous month.
+Formatting: The year and month are formatted into a string with the month padded to ensure two digits.
+You can test this function with different inputs by changing startMonth and numQuarters in the example usage.
